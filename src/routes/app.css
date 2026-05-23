@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "Questrial";
+    src: url("./Questrial-Regular.ttf") format("truetype");
+}
+
+:root {
+    font-family: "Questrial", sans-serif;
+}
