@@ -8,6 +8,7 @@
     "opener:default",
     "android-utils:default",
     "android-utils:allow-get-installed-apps",
-    "android-utils:allow-get-user-installed-apps"
+    "android-utils:allow-get-user-installed-apps",
+    "android-utils:allow-get-app-tv-banner"
   ]
 }

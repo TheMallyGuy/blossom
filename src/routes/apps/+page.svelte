@@ -1,20 +1,39 @@
 <script lang="ts">
-  import { fly } from "svelte/transition";
-  import { cubicOut } from "svelte/easing";
+  import AppCard from "$lib/components/AppCard.svelte";
+  import { onMount } from "svelte";
+  import {
+    getUserInstalledApps,
+    type AppInfo,
+  } from "tauri-plugin-android-utils-api";
+
+  let applist = $state<AppInfo[]>([]);
+  let loading = $state(true);
+  let error = $state<string | null>(null);
+
+  onMount(async () => {
+    try {
+      applist = await getUserInstalledApps();
+      applist.sort((a, b) => a.appName.localeCompare(b.appName));
+    } catch (e) {
+      error = e instanceof Error ? e.message : String(e);
+    } finally {
+      loading = false;
+    }
+  });
 </script>
 
-<div 
-  in:fly={{ y: 1080, duration: 600, easing: cubicOut }}
-  class="flex h-screen w-full flex-col justify-between p-12 text-white"
->
-  <div class="mx-auto mt-20 max-w-2xl">
-    <h1 class="mb-4 text-4xl font-bold">WHO nâng cảnh báo dịch Ebola lên mức 'rất cao'</h1>
-    <p class="text-lg leading-relaxed opacity-90">
-      Tổ chức Y tế Thế giới (WHO) mới đây đã ban bố tình trạng khẩn cấp toàn diện đối với biến thể mới...
-    </p>
-  </div>
-  
-  <div class="animate-bounce text-center text-sm opacity-50">
-    Press Down Arrow to Go Back
-  </div>
+<div class="h-full w-full overflow-y-auto p-8 text-white">
+  <h1 class="mb-6 text-sm opacity-70">App menu</h1>
+
+  {#if loading}
+    <p class="opacity-70">Loading...</p>
+  {:else if error}
+    <p class="text-red-400">Error: {error}</p>
+  {:else}
+    <div class="grid grid-cols-6 gap-4">
+      {#each applist as app (app.packageName)}
+        <AppCard {app} />
+      {/each}
+    </div>
+  {/if}
 </div>
