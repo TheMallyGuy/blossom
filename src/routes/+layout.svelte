@@ -5,7 +5,7 @@
   import { goto } from "$app/navigation";
   import { navigating } from "$app/state";
   import { onMount } from "svelte";
-  import { invoke } from "@tauri-apps/api/core";
+  import { getUserInstalledApps } from "tauri-plugin-android-utils-api";
 
   let { children } = $props();
 
@@ -16,9 +16,9 @@
   }
 
   onMount(async () => {
-    const apps = await invoke("get_android_apps")
-    console.log(apps)
-  })
+    const apps = await getUserInstalledApps()
+    console.log(`all apps: ${apps}`);
+  });
 </script>
 
 <svelte:window onkeydown={handleKeyDown} />

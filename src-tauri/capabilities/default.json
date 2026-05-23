@@ -2,9 +2,12 @@
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
   "description": "Capability for the main window",
-  "windows": ["main"],
+  "windows": ["*"],
   "permissions": [
     "core:default",
-    "opener:default"
+    "opener:default",
+    "android-utils:default",
+    "android-utils:allow-get-installed-apps",
+    "android-utils:allow-get-user-installed-apps"
   ]
 }

@@ -1,5 +1,10 @@
 <script lang="ts">
   import Clock from "$lib/components/Clock.svelte";
+  import { onMount } from "svelte";
+
+  onMount(async () => {
+    
+  })
 </script>
 
 <div class="flex h-full w-full flex-col justify-between">
