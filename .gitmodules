@@ -1,0 +1,3 @@
+[submodule "plugins/android-plugin"]
+	path = plugins/android-plugin
+	url = https://github.com/TheMallyGuy/tauri-android-utils-api
